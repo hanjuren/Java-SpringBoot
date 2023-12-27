@@ -3,6 +3,7 @@
 # java
 build
 out
+.gradle
 
 # hello-spring
 /hello-spring/h2

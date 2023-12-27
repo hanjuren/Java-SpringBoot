@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  spring:
+    container_name: spring
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    command: ./gradlew bootRun
+    depends_on:
+      - h2db
+    ports:
+      - '8080:8080'
+#      - '8000:8000' docker image inspect
+
+    # h2 database
+  h2db:
+    container_name: h2db
+    image: oscarfonts/h2:latest
+    ports:
+      - '1521:1521'
+      - '8081:81'
+    environment:
+      H2_OPTIONS: -ifNotExists
+    volumes:
+      - ./h2/:/opt/h2-data
+    restart: always
