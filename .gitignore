@@ -1,1 +1,9 @@
 .idea
+
+# java
+build
+out
+
+# hello-spring
+/hello-spring/h2
+/hello-spring/spring-start-v20231127
