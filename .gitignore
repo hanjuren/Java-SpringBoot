@@ -6,7 +6,7 @@ out
 .gradle
 
 # docker volume
-databaes
+database
 
 # hello-spring
 /hello-spring/h2
