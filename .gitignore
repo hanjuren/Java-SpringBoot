@@ -5,6 +5,9 @@ build
 out
 .gradle
 
+# docker volume
+databaes
+
 # hello-spring
 /hello-spring/h2
 /hello-spring/spring-start-v20231127
