@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    hikari:
+      auto-commit: false
+    url: jdbc:postgresql://localhost:5432/jwt
+    username: jwt
+    password: jwt
+    driver-class-name: org.postgresql.Driver

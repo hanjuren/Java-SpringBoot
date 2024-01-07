@@ -1,0 +1,15 @@
+version: "3.10"
+
+services:
+  ## backend
+  jwt-db:
+    container_name: jwt-db
+    image: postgres:16.1-alpine3.19
+    restart: always
+    environment:
+      - POSTGRES_USER=jwt
+      - POSTGRES_PASSWORD=jwt
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database:/var/lib/postgresql/data
