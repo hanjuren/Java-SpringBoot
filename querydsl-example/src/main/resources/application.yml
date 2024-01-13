@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active: local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/querydsl-example
+    username: querydsl-example
+    password: querydsl-example
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      auto-commit: false
+
+logging:
+  level:
+    org.hibernate.orm.jdbc.bind: trace
