@@ -5,22 +5,23 @@ import jakarta.persistence.*;
 public class JpaMain {
 
     public static void main(String[] args) {
-
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-basic");
         EntityManager em = emf.createEntityManager();
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
-        Member member = new Member();
-        member.setId(1L);
-        member.setName("HelloA");
+        try {
+            Member member = em.find(Member.class, 3L);
+            member.setName("HelloJPA-Update-Test");
 
-        em.persist(member);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+        } finally {
+            em.close();
+        }
 
-        transaction.commit();
-
-        em.close();
         emf.close();
     }
 }
