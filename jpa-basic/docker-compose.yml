@@ -1,0 +1,13 @@
+version: "3.10"
+
+services:
+  db:
+    container_name: db
+    image: postgres:16.1-alpine3.19
+    environment:
+      - POSTGRES_USER=jpa-basic
+      - POSTGRES_PASSWORD=jpa-basic
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database:/var/lib/postgresql/data
