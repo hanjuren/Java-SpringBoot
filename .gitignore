@@ -4,6 +4,7 @@
 build
 out
 .gradle
+target
 
 # docker volume
 database
