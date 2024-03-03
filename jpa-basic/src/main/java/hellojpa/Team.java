@@ -6,14 +6,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Entity
-@Table(name = "members")
-public class Member {
+@Table(name = "teams")
+public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +23,6 @@ public class Member {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id")
-    private Team team;
+    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
+    private List<Member> members = new ArrayList<>();
 }

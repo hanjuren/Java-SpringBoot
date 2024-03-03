@@ -1,9 +1,8 @@
 package hellojpa;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 public class JpaMain {
 
@@ -15,6 +14,17 @@ public class JpaMain {
         transaction.begin();
 
         try {
+            Team team = em.find(Team.class, 1L);
+            Member member10 = Member.builder()
+                    .name("member10")
+                    .team(team)
+                    .build();
+            em.persist(member10);
+
+            for (Member member : team.getMembers()) {
+                System.out.println("member = " + member.getName() + ", " + member.getId());
+            }
+
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
