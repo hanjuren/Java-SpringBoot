@@ -17,12 +17,12 @@ import java.time.LocalDateTime;
 public class Order {
 
     @Id
-    @Column(name = "order_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "member_id")
-    private Long memberId;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Column(name = "order_date_time")
     private LocalDateTime orderDateTime;

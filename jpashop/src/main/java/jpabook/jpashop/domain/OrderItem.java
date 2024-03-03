@@ -15,15 +15,16 @@ import lombok.NoArgsConstructor;
 public class OrderItem {
 
     @Id
-    @Column(name = "order_item_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "order_id")
-    private Long orderId;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-    @Column(name = "item_id")
-    private Long itemId;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     @Column(name = "order_price")
     private Integer orderPrice;
