@@ -6,28 +6,27 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(name = "items")
-public class Item {
+@Table(name = "deliveries")
+public class Delivery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String city;
 
-    private Integer price;
+    private String street;
 
-    @Column(name = "stock_quantity")
-    private Integer stockQuantity;
+    private String zipcode;
 
-    @ManyToMany(mappedBy = "items")
-    private List<Category> categories = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    private DeliveryStatus status;
+
+    @OneToOne(mappedBy = "delivery")
+    private Order order;
 }
