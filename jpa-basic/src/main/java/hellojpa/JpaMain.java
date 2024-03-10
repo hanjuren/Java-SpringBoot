@@ -2,6 +2,8 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 public class JpaMain {
 
     public static void main(String[] args) {
@@ -12,19 +14,14 @@ public class JpaMain {
         transaction.begin();
 
         try {
-            Movie movie = Movie.builder()
-                            .director("크리스토퍼 놀란")
-                            .actor("레오나르도 디카프리오")
-                            .name("인셉션")
-                            .price(18000)
-                            .build();
-            em.persist(movie);
-
-            em.clear();
-            em.flush();
-
-            Movie findMovie = em.find(Movie.class, movie.getId());
-            System.out.println("findMovie = " + findMovie);
+            Member member = Member.builder()
+                    .name("member1")
+                    .createdBy("kim")
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .lastModifiedBy("kim")
+                    .build();
+            em.persist(member);
 
             transaction.commit();
         } catch (Exception e) {
