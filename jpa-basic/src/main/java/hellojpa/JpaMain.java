@@ -2,8 +2,6 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 public class JpaMain {
 
     public static void main(String[] args) {
@@ -14,16 +12,19 @@ public class JpaMain {
         transaction.begin();
 
         try {
-            Team team = em.find(Team.class, 1L);
-            Member member10 = Member.builder()
-                    .name("member10")
-                    .team(team)
-                    .build();
-            em.persist(member10);
+            Movie movie = Movie.builder()
+                            .director("크리스토퍼 놀란")
+                            .actor("레오나르도 디카프리오")
+                            .name("인셉션")
+                            .price(18000)
+                            .build();
+            em.persist(movie);
 
-            for (Member member : team.getMembers()) {
-                System.out.println("member = " + member.getName() + ", " + member.getId());
-            }
+            em.clear();
+            em.flush();
+
+            Movie findMovie = em.find(Movie.class, movie.getId());
+            System.out.println("findMovie = " + findMovie);
 
             transaction.commit();
         } catch (Exception e) {
