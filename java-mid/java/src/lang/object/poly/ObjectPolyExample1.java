@@ -1,4 +1,4 @@
-package lang.poly;
+package lang.object.poly;
 
 public class ObjectPolyExample1 {
 
