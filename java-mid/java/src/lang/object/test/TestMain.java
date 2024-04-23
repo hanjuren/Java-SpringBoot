@@ -11,5 +11,6 @@ public class TestMain {
         System.out.println("identity: " + (rectangle1 == rectangle2));
         System.out.println("equality: " + (rectangle1.equals(rectangle2)));
         System.out.println("equality: " + (rectangle2.equals(rectangle1)));
+        System.out.println("hashcode: " + rectangle1.hashCode());
     }
 }
