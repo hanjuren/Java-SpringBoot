@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class JpaMain {
 
@@ -15,25 +16,21 @@ public class JpaMain {
         transaction.begin();
 
         try {
-            Member reference = em.getReference(Member.class, 1L);
-            System.out.println("reference = " + reference.getClass());
+            List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
+            for (Member member : members) {
+                System.out.println("member = " + member.getName());
+            }
 
-            Member findMember1 = em.find(Member.class, 1L);
-            System.out.println("findMember1 = " + findMember1.getClass());
+            System.out.println("=====================================");
 
-            em.clear();
+            em.createQuery("select m from Member m join fetch m.team", Member.class)
+                    .getResultList()
+                    .forEach(m -> {
+                        System.out.println("member = " + m.getName() + ", team = " + m.getTeam().getName());
+                    });
 
-            Member findMember2 = em.getReference(Member.class, 1L);
-            System.out.println("findMember2 = " + findMember2.getClass());
-            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(findMember2));
-            Hibernate.initialize(findMember2);
-            System.out.println("findMember2 = " + findMember2.getClass());
-            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(findMember2));
-//            em.clear();
-//            System.out.println("findMember2 = " + findMember2.getName()); // org.hibernate.LazyInitializationException
         } catch (Exception e) {
             transaction.rollback();
-            e.printStackTrace();
         } finally {
             em.close();
         }
